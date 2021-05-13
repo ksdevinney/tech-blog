@@ -35,6 +35,7 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+// view all posts
 router.get('/', async (req, res) => {
   try {
     const allPosts = await Post.findAll({
