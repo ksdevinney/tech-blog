@@ -5,39 +5,52 @@ const { Post, User, Comment } = require('../models');
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
-            where: {
-                user_id: req.session.user_id
-            },
-            attributes: [
-                'id',
-                'post_text',
-                'title',
-            ],
             include: [
                 {
-                    model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
-                },
-                {
                     model: User,
-                    attributes: ['username']
-                }
-            ]
+                    Post,
+                    attributes: ['username'],
+                },
+            ],
+            attributes: {
+                exclude: ['password'],
+            },
         });
-        const posts = postData.map(post => post.get({ plain:true }));
+        const posts = postData.map((post) => post.get({ plain:true }));
 
-        res.render('homepage', { posts })
+        res.render('homepage', { 
+            posts,
+        logged_in: req.session.logged_in,
+     });
     } catch (error) {
         res.status(500).json(error);
     }
 });
 
 router.get('/edit/:id', async (req, res) => {
-    
+    try {
+        // get one post by id
+        const postData = await Post.findOne(req.params.id, {
+            include: [
+                {
+                    model: User,
+                    Post,
+                    Comment,
+                    attributes: ['username'],
+                },
+            ],
+        });
+
+        const post = postData.get({ plain: true });
+
+        // render it on the homepage
+        res.render('homepage', { 
+            ...post,
+        logged_in: req.session.logged_in,
+     });
+    } catch (error) {
+        res.status(500).json(error);
+    }
 });
 
 router.get('/login', async (req, res) => {
