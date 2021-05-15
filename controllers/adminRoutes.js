@@ -54,7 +54,7 @@ router.get('/edit/:id', async (req, res) => {
 });
 
 router.get('/login', async (req, res) => {
-
+// res.render login
 });
 
 router.get('/signup', async (req, res) => {
@@ -64,3 +64,5 @@ router.get('/signup', async (req, res) => {
 // router.get('/logout', async (req, res) => {
 
 // });
+
+module.exports = router;
