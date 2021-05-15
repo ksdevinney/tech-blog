@@ -1,0 +1,22 @@
+[
+    {
+        "body": "That sounds like a good idea!",
+        "user_id": 2,
+        "post_id": 1
+    },
+    {
+        "body": "Wow",
+        "user_id": 3,
+        "post_id": 1
+    },
+    {
+        "body": "Cool!",
+        "user_id": 2,
+        "post_id": 1
+    },
+    {
+        "body": "Cool!",
+        "user_id": 3,
+        "post_id": 1
+    }
+]

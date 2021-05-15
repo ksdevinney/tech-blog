@@ -2,42 +2,23 @@
 const loginFormHandler = async (event) => {
     event.preventDefault();
 
-    const username = document.querySelector('#login-username').nodeValue.trim();
-    const password = document.querySelector('#login-password').nodeValue.trim();
+    const usernameEl = document.querySelector('#login-username').value.trim();
+    const passwordEl = document.querySelector('#login-password').value.trim();
 
     if (username && password) {
         const response = await fetch('/api/users/login', {
             method: 'POST',
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ 
+                username: usernameEl.value, 
+                password: passwordEl.value, 
+            }),
             headers: { 'Content-Type': 'application/json' },
-        });
-
-        if (response.ok) {
-            document.location.replace('/api/posts');
-        } else {
-            alert('Cannot log in');
-        }
-    }
-};
-
-const signupFormHandler = async (event) => {
-    event.preventDefault();
-
-    const name = document.querySelector('#username-signup').value.trim();
-    const email = document.querySelector('#email-signup').value.trim();
-    const password = document.querySelector('#password-signup').value.trim();
-
-    if (name && email && password) {
-        const response = await fetch('/api/users', {
-            method: 'POST',
-            body: JSON.stringify({ username, email, password }),
-            headers: { 'Content-Type': 'application/json'},
         });
 
         if (response.ok) {
             document.location.replace('/dashboard');
         } else {
-            alert('Cannot create account');
+            alert('Cannot log in');
         }
     }
 };
@@ -45,7 +26,3 @@ const signupFormHandler = async (event) => {
 document
     .querySelector('.login-form')
     .addEventListener('submit', loginFormHandler);
-
-document
-    .querySelector('.signup-form')
-    .addEventListener('submit', signupFormHandler);

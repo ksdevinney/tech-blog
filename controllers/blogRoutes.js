@@ -12,55 +12,52 @@ router.get('/', async (req, res) => {
 
         const posts = postData.map((post) => post.get({ plain: true }));
 
-        res.render('homepage', { posts });
+        res.render('all-posts', { posts });
     } catch (error) {
         console.log('ERROR HERE: ', error);
         res.status(500).json(error);
     }
 });
 
-router.get('/post/:id', async (req, res) => {
+router.get('/post/:id', async (req, res) => { 
     try {
-        const onePost = Post.findOne({
-            where: {
-                id: req.params.id
-            },
-            attributes: [
-                'id',
-                'title',
-                'body'
-            ],
+        const postData = await Post.findByPk(req.params.id, {
             include: [
-                {
-                    model: User,
-                    attributes: ['username']
-                },
+                User,
                 {
                     model: Comment,
-                    attributes: ['id'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
-                }
-            ]
-        })
-        if (!onePost) {
-            res.status(404).json({ message: 'No posts with this id!' });
-            return;
+                    include: [User],
+                },
+            ],
+        });
+
+        if (postData) {
+        const post = postData.get({ plain: true });
+
+        res.render('single-post', { post });
+        } else {
+            res.status(404).end();
         }
-        res.status(200).json(onePost);
     } catch (err) {
-        res.status(500).json(err);
-    }
+            res.status(500).json(err);
+        }
 });
 
-// router.get('/login', async (req, res) => {});
+router.get('/login', (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('login');
+});
 
-// // router.get('/logout', async (req, res) => {
 
-// // });
-
-// router.get('/signup', async (req, res) => {});
+router.get('/signup', (req, res) => {
+    if (req.session.loggedIn) {
+        res.redirect('/');
+        return;
+    }
+    res.render('signup');
+});
 
 module.exports = router;
