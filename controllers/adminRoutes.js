@@ -13,12 +13,12 @@ router.get('/', withAuth, async (req, res) => {
         });
         const posts = postData.map((post) => post.get({ plain: true }));
 
-        res.render('dashboard', {
+        res.render('all-posts-admin', {
             layout: 'dashboard',
             posts,
         });
     } catch (err) {
-        res.redirect('login');
+        res.redirect('/login');
     }
 });
 
@@ -48,9 +48,11 @@ router.get('/edit/:id', withAuth, async (req, res) => {
     }
 });
 
-// router.get('/login', async (req, res) => {
-//     // res.render login
-// });
+router.get('/login', async (req, res) => {
+    res.render('login', {
+        layout: 'dashboard',
+    });
+});
 
 // router.get('/signup', async (req, res) => {
 
