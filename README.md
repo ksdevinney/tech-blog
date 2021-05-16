@@ -2,7 +2,7 @@
 
 ## About
 
-![tech blog posts](public/tech-blog.png)
+![tech blog posts](/public/tech-blog.png)
 
 This is an MVC-style tech blog, intended for sharing information and thoughts about new and current technology. Users can publish articles and leave comments on the articles of others. 
 
