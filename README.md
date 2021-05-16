@@ -20,4 +20,4 @@ Seed the database with `npm run seed`
 
 Then start the application by running `npm run start`
 
-The application is also [deployed to Heroku](https://secret-taiga-67264.herokuapp.com/)
+The application is also [deployed to Heroku](https://secret-taiga-67264.herokuapp.com/) .
