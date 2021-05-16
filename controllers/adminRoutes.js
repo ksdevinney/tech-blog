@@ -54,12 +54,10 @@ router.get('/login', async (req, res) => {
     });
 });
 
-// router.get('/signup', async (req, res) => {
-
-// });
-
-// router.get('/logout', async (req, res) => {
-
-// });
+router.get('/signup', async (req, res) => {
+    res.render('signup', {
+        layout: 'dashboard',
+    });
+});
 
 module.exports = router;
