@@ -1,11 +1,11 @@
 // starter code from class
 const router = require('express').Router();
-const apiRoutes = require('./api/');
-const blogRoutes = require('./blogRoutes.js');
 const adminRoutes = require('./adminRoutes.js');
+const blogRoutes = require('./blogRoutes.js');
+const apiRoutes = require('./api/');
 
-router.use(adminRoutes);
-router.use('/api', apiRoutes);
+router.use('/', adminRoutes);
 router.use('/posts', blogRoutes);
+router.use('/api', apiRoutes);
 
 module.exports = router;

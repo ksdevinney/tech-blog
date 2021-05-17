@@ -2,8 +2,9 @@
 
 // starter code from class
 const router = require('express').Router();
-const { Post, User, Comment } = require('../models');
+const { Post, Comment, User } = require('../models/');
 
+// get all posts for homepage
 router.get('/', async (req, res) => {
     try {
         const postData = await Post.findAll({
@@ -19,6 +20,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+// get a single post, with comments
 router.get('/post/:id', async (req, res) => { 
     try {
         const postData = await Post.findByPk(req.params.id, {

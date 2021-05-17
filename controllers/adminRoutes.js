@@ -1,6 +1,6 @@
 // user dashboard
 const router = require('express').Router();
-const { Post } = require('../models');
+const { Post } = require('../models/');
 const withAuth = require('../util/auth');
 
 // should be posts only by this user
@@ -22,12 +22,14 @@ router.get('/', withAuth, async (req, res) => {
     }
 });
 
+// display the new post template
 router.get('/new', withAuth, (req, res) => {
     res.render('new-post', {
         layout: 'dashboard',
     });
 });
 
+// edit a post
 router.get('/edit/:id', withAuth, async (req, res) => {
     try {
         // get one post by id
@@ -48,16 +50,17 @@ router.get('/edit/:id', withAuth, async (req, res) => {
     }
 });
 
-router.get('/login', async (req, res) => {
-    res.render('login', {
-        layout: 'dashboard',
-    });
-});
+// don't need these here
+// router.get('/login', async (req, res) => {
+//     res.render('login', {
+//         layout: 'dashboard',
+//     });
+// });
 
-router.get('/signup', async (req, res) => {
-    res.render('signup', {
-        layout: 'dashboard',
-    });
-});
+// router.get('/signup', async (req, res) => {
+//     res.render('signup', {
+//         layout: 'dashboard',
+//     });
+// });
 
 module.exports = router;
