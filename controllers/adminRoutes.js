@@ -50,17 +50,16 @@ router.get('/edit/:id', withAuth, async (req, res) => {
     }
 });
 
-// don't need these here
-// router.get('/login', async (req, res) => {
-//     res.render('login', {
-//         layout: 'dashboard',
-//     });
-// });
+router.get('/login', async (req, res) => {
+    res.render('login', {
+        layout: 'dashboard',
+    });
+});
 
-// router.get('/signup', async (req, res) => {
-//     res.render('signup', {
-//         layout: 'dashboard',
-//     });
-// });
+router.get('/signup', async (req, res) => {
+    res.render('signup', {
+        layout: 'dashboard',
+    });
+});
 
 module.exports = router;
