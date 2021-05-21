@@ -47,10 +47,12 @@ router.get('/post/:id', async (req, res) => {
 
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
+        console.log("Login route")
         res.redirect('/');
         return;
-    }
+    } else {
     res.render('login');
+    }
 });
 
 
